@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag map</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e8e8f0;
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 700;
+            text-align: center;
+            margin: 0 0 30px;
+            color: #ffffff;
+            text-shadow: 0 2px 15px rgba(0, 255, 200, 0.4);
+        }
+
+        h1 code {
+            font-family: 'Cascadia Code', Consolas, monospace;
+            background: linear-gradient(90deg, #00d9ff, #00ff9d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            padding: 0 6px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 28px 70px rgba(0, 217, 255, 0.15);
+        }
+
+        .card img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        .hint {
+            text-align: center;
+            font-size: 15px;
+            color: rgba(232, 232, 240, 0.65);
+            margin-top: 20px;
+            letter-spacing: 0.3px;
+        }
+
+        .hint span {
+            display: inline-block;
+            background: rgba(0, 217, 255, 0.12);
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            border-radius: 30px;
+            padding: 8px 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ми вивчаємо <code>&lt;tag map&gt;</code></h1>
+
+        <div class="card">
+            <img src="https://i.pinimg.com/736x/e2/4c/70/e24c70b7c346b0f3415fa05b4f906c4e.jpg" alt="Геометричні фігури" usemap="#figures">
+        </div>
+
+        <p class="hint"><span>💡 Клікніть на будь-яку фігуру на картинці — вона клікабельна!</span></p>
+    </div>
+    <map name="figures">
+        <area shape="poly" coords="200,480,380,480,290,310" href="https://en.wikipedia.org/wiki/Triangle" target="_blank" alt="Трикутник">
+        <area shape="poly" coords="215,240,95,240,59,130,153,60,250,130" href="https://en.wikipedia.org/wiki/Rhombus" target="_blank" alt="Ромб">
+        <area shape="rect" coords="390,310,660,480" href="https://en.wikipedia.org/wiki/Rectangle" target="_blank" alt="Прямокутник">
+        <area shape="circle" coords="560,160,90" href="https://en.wikipedia.org/wiki/Circle" target="_blank" alt="Коло">
+        <area shape="poly" coords="67,400,208,400,140,310,140,490" href="https://en.wikipedia.org/wiki/Quadrilateral" target="_blank" alt="Чотирикутник">
+        <area shape="poly" coords="270,240,450,240,450,65,270,65" href="https://en.wikipedia.org/wiki/Square" target="_blank" alt="Квадрат">
+    </map>
+    </div>
+</body>
+</html>

@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мій перший сайт</title>
+    <link rel="short icon" href="android-chrome-192x192.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+    :root {
+        --bg: #000;
+        --text: #f5f5f7;
+        --text-dim: #a1a1a6;
+        --glass: rgba(22, 22, 23, .65);
+        --card: rgba(29, 29, 31, .55);
+        --border: rgba(255, 255, 255, .12);
+        --accent: #fff;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background-color: var(--bg);
+        /* Зоряне небо: шари з зірочками */
+        background-image:
+            radial-gradient(1.5px 1.5px at 25% 15%, rgba(255,255,255,.9) 50%, transparent 51%),
+            radial-gradient(1px 1px at 65% 30%, rgba(255,255,255,.7) 50%, transparent 51%),
+            radial-gradient(2px 2px at 85% 12%, rgba(255,255,255,.8) 50%, transparent 51%),
+            radial-gradient(1px 1px at 10% 45%, rgba(255,255,255,.6) 50%, transparent 51%),
+            radial-gradient(1.5px 1.5px at 45% 60%, rgba(255,255,255,.8) 50%, transparent 51%),
+            radial-gradient(1px 1px at 75% 70%, rgba(255,255,255,.6) 50%, transparent 51%),
+            radial-gradient(2px 2px at 15% 80%, rgba(255,255,255,.9) 50%, transparent 51%),
+            radial-gradient(1px 1px at 55% 88%, rgba(255,255,255,.7) 50%, transparent 51%),
+            radial-gradient(1.5px 1.5px at 90% 55%, rgba(255,255,255,.8) 50%, transparent 51%),
+            radial-gradient(1px 1px at 35% 35%, rgba(255,255,255,.5) 50%, transparent 51%),
+            radial-gradient(circle at 20% 20%, rgba(255,255,255,.06), transparent 40%),
+            radial-gradient(circle at 80% 70%, rgba(255,255,255,.05), transparent 40%);
+        background-attachment: fixed;
+        color: var(--text);
+        font-family: "Inter", "SF Pro Display", "Segoe UI", sans-serif;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* Верхня навігаційна панель як на apple.com */
+    .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(20px) saturate(1.8);
+        -webkit-backdrop-filter: blur(20px) saturate(1.8);
+        background: var(--glass);
+        border-bottom: 1px solid var(--border);
+        padding: 12px 5%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        flex-wrap: wrap;
+    }
+    .topbar a {
+        color: var(--text-dim);
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: .2px;
+        transition: color .3s;
+    }
+    .topbar a:hover {
+        color: var(--text);
+    }
+
+    header {
+        min-height: 92vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .bgvideo {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        inset: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .bgvideo video {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+        z-index: 1;
+        opacity: .45;
+        filter: grayscale(1) brightness(.7);
+    }
+    .bgvideo::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        background: linear-gradient(180deg, rgba(0,0,0,.2) 0%, rgba(0,0,0,.85) 90%);
+    }
+    h1 {
+        position: relative;
+        z-index: 3;
+        text-align: center;
+        font-size: clamp(44px, 7vw, 96px);
+        font-weight: 700;
+        letter-spacing: -.03em;
+        color: var(--text);
+        background: linear-gradient(180deg, #fff 30%, #86868b);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    header .subtitle {
+        position: absolute;
+        z-index: 3;
+        top: calc(50% + clamp(48px, 7vw, 100px));
+        left: 0;
+        right: 0;
+        text-align: center;
+        color: var(--text-dim);
+        font-size: clamp(17px, 2vw, 24px);
+        font-weight: 400;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: clamp(30px, 4vw, 48px);
+        font-weight: 600;
+        letter-spacing: -.02em;
+        margin-bottom: 24px;
+        font-size: 3wm;
+    }
+    h3 {
+        font-size: clamp(20px, 2.4vw, 28px);
+        font-weight: 600;
+        letter-spacing: -.01em;
+        margin-bottom: 12px;
+    }
+
+    .layout {
+        display: grid;
+        grid-template-columns: 240px minmax(0, 1fr) 240px;
+        gap: 24px;
+        padding: 48px 5%;
+        max-width: 1440px;
+        margin: 0 auto;
+        align-items: start;
+    }
+    nav, aside {
+        position: sticky;
+        top: 80px;
+    }
+    nav h2, aside h2 {
+        font-size: 15px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .12em;
+        color: var(--text-dim);
+        text-align: left;
+        margin: 8px 0 16px;
+    }
+
+    .panel {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        padding: 20px;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+    }
+
+    main {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 28px;
+        padding: clamp(24px, 4vw, 56px);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+    }
+
+    main section {
+        padding: 40px 0;
+        border-bottom: 1px solid var(--border);
+    }
+    main section:first-of-type {
+        padding-top: 8px;
+    }
+    main section:last-of-type {
+        border-bottom: 0;
+        padding-bottom: 0;
+    }
+    main p {
+        color: var(--text-dim);
+        font-size: 17px;
+        max-width: 640px;
+    }
+
+    #aboutme {
+        margin: 0;
+    }
+
+    iframe, video[controls] {
+        border-radius: 18px;
+        border: 1px solid var(--border);
+        background: #0a0a0a;
+    }
+
+    audio {
+        width: 100%;
+        filter: invert(1) grayscale(1) contrast(1.1);
+        border-radius: 12px;
+    }
+
+    /* ===== Кнопка в стилі Apple: біла «пігулка» ===== */
+    .button-75 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 12px 22px;
+        margin-bottom: 10px;
+        background: var(--accent);
+        color: #000;
+        border: 0;
+        border-radius: 980px; /* справжня Apple-пігулка */
+        font-family: inherit;
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: -.01em;
+        line-height: 1;
+        text-decoration: none;
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        transition: transform .3s ease, opacity .3s ease, box-shadow .3s ease;
+        box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 10px 30px rgba(0,0,0,.5);
+    }
+    .button-75:active {
+        outline: 0;
+    }
+    .button-75:hover {
+        outline: 0;
+        transform: translateY(-1px);
+        box-shadow: 0 0 0 1px rgba(255,255,255,.2), 0 14px 40px rgba(255,255,255,.12);
+    }
+    .button-75 span {
+        transition: transform 200ms ease, opacity 200ms ease;
+    }
+    .button-75:hover span {
+        transform: scale(.97);
+        opacity: .75;
+    }
+
+    /* Другорядна (скляна) версія кнопки */
+    .button-75.ghost {
+        background: transparent;
+        color: var(--text);
+        border: 1px solid var(--border);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: none;
+    }
+    .button-75.ghost:hover {
+        border-color: rgba(255,255,255,.4);
+        box-shadow: 0 10px 30px rgba(0,0,0,.4);
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    footer {
+        clear: both;
+        margin-top: 48px;
+        border-top: 1px solid var(--border);
+        background: rgba(10, 10, 10, .8);
+        padding: 56px 5%;
+        text-align: center;
+    }
+    footer p {
+        color: var(--text-dim);
+        font-size: 13px;
+        margin-top: 8px;
+    }
+
+    /* Плавна поява секцій */
+    .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity .8s ease, transform .8s ease;
+    }
+    .reveal.visible {
+        opacity: 1;
+        transform: none;
+    }
+
+    @media screen and (max-width: 991px) {
+        .layout {
+            grid-template-columns: 1fr;
+        }
+        nav, aside {
+            position: static;
+        }
+        .button-75 {
+            font-size: 15px;
+        }
+    }
+    .mc a {
+        display: inline-block;
+        margin: 0 8px;
+    }
+    .mc img {
+        filter: invert(1) grayscale(1) contrast(1.2);
+        transition: filter .3s ease;
+    }
+    /* ===== Зірчастий чорно-білий фон ===== */
+    body {
+        background-color: #000;
+        color: #f5f5f7;
+        font-family: -apple-system, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    }
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background-image:
+            radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.9) 50%, transparent 50%),
+            radial-gradient(1px 1px at 40% 70%, rgba(255,255,255,.7) 50%, transparent 50%),
+            radial-gradient(1px 1px at 60% 20%, rgba(255,255,255,.8) 50%, transparent 50%),
+            radial-gradient(1px 1px at 80% 50%, rgba(255,255,255,.6) 50%, transparent 50%),
+            radial-gradient(1px 1px at 10% 80%, rgba(255,255,255,.5) 50%, transparent 50%),
+            radial-gradient(1px 1px at 90% 10%, rgba(255,255,255,.7) 50%, transparent 50%),
+            radial-gradient(1px 1px at 30% 10%, rgba(255,255,255,.6) 50%, transparent 50%),
+            radial-gradient(1px 1px at 70% 90%, rgba(255,255,255,.8) 50%, transparent 50%),
+            radial-gradient(2px 2px at 50% 40%, rgba(255,255,255,.9) 50%, transparent 50%),
+            radial-gradient(1px 1px at 5% 45%, rgba(255,255,255,.4) 50%, transparent 50%);
+        background-size: 500px 500px, 500px 500px, 500px 500px, 500px 500px, 500px 500px,
+            500px 500px, 500px 500px, 500px 500px, 500px 500px, 500px 500px;
+        animation: twinkle 5s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle {
+        from { opacity: .6; }
+        to { opacity: 1; }
+    }
+
+    /* ===== Верхня панель як в Apple ===== */
+    .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        padding: 14px 20px;
+        background: rgba(0, 0, 0, .7);
+        backdrop-filter: saturate(180%) blur(20px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+    }
+    .topbar a {
+        color: #d2d2d7;
+        font-size: 14px;
+        transition: color 200ms;
+    }
+    .topbar a:hover {
+        color: #fff;
+    }
+
+    /* ===== Hero ===== */
+    header {
+        height: 70vh;
+        background: transparent;
+    }
+    header h1 {
+        color: #fff;
+        z-index: 2;
+        font-size: 6vw;
+        letter-spacing: -.02em;
+        text-shadow: 0 0 40px rgba(255, 255, 255, .35);
+    }
+    .subtitle {
+        position: absolute;
+        z-index: 2;
+        margin-top: 14vw;
+        color: #a1a1a6;
+        font-size: clamp(16px, 2vw, 24px);
+    }
+
+    /* ===== Layout та панелі ===== */
+    .layout {
+        display: grid;
+        grid-template-columns: 260px 1fr 260px;
+        gap: 24px;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+    .panel {
+        background: rgba(255, 255, 255, .05);
+        border: 1px solid rgba(255, 255, 255, .1);
+        border-radius: 22px;
+        padding: 24px 16px;
+        height: fit-content;
+        width: auto;
+        float: none;
+    }
+    .panel h2 {
+        color: #a1a1a6;
+        font-size: 15px;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+    }
+    main {
+        width: auto;
+        float: none;
+        background: transparent;
+    }
+    main section {
+        background: rgba(255, 255, 255, .04);
+        border: 1px solid rgba(255, 255, 255, .08);
+        border-radius: 22px;
+        padding: 24px;
+        margin-bottom: 24px;
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 600ms ease, transform 600ms ease;
+    }
+    main section.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    main h3 {
+        color: #fff;
+    }
+    main p {
+        color: #a1a1a6;
+        line-height: 1.6;
+    }
+
+    /* ===== Кастомні кнопки як в Apple ===== */
+    .button-75 {
+        align-items: center;
+        background: #f5f5f7;
+        color: #000;
+        border: 0;
+        border-radius: 999px;
+        box-sizing: border-box;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        font-family: inherit;
+        font-size: 16px;
+        font-weight: 500;
+        height: 48px;
+        justify-content: center;
+        letter-spacing: .2px;
+        line-height: 1;
+        width: 100%;
+        margin: 12px 0 0;
+        padding: 0 20px;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        transition: background 200ms, transform 200ms, box-shadow 200ms;
+    }
+    .button-75:hover {
+        background: #fff;
+        transform: translateY(-1px);
+        box-shadow: 0 8px 24px rgba(255, 255, 255, .2);
+    }
+    .button-75:hover span {
+        transform: scale(1);
+        opacity: 1;
+    }
+    .button-75:active {
+        transform: scale(.97);
+    }
+    .button-75.ghost {
+        background: transparent;
+        color: #f5f5f7;
+        border: 1px solid rgba(255, 255, 255, .35);
+    }
+    .button-75.ghost:hover {
+        background: rgba(255, 255, 255, .1);
+        box-shadow: none;
+        border-color: rgba(255, 255, 255, .7);
+    }
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+    h2 {
+        text-align: center;
+        font-size: 30px;
+    }
+    h3 {
+        text-align: left;
+        font-size: 22px;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+        clear: both;
+        background: transparent;
+        border-top: 1px solid rgba(255, 255, 255, .1);
+        padding: 60px 20px;
+        text-align: center;
+        color: #6e6e73;
+        height: auto;
+    }
+    footer h2 {
+        color: #f5f5f7;
+    }
+
+    /* ===== Адаптивність ===== */
+    @media screen and (max-width: 1100px) {
+        .layout {
+            grid-template-columns: 1fr;
+        }
+        .panel {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .panel .button-75 {
+            width: 100%;
+        }
+    }
+    @media screen and (max-width: 991px) {
+        .button-75 {
+            font-size: 15px;
+            height: 46px;
+        }
+        .topbar {
+            gap: 20px;
+        }
+        header h1 {
+            font-size: 10vw;
+        }
+        .subtitle {
+            margin-top: 26vw;
+        }
+    }
+    @media screen and (max-width: 800px){
+  nav,main,aside,.mc{
+    width: 100%;
+        }
+    }
+    </style>
+</head>
+    <body>
+    <div class="topbar">
+        <a href="#aboutme">Про мене</a>
+        <a href="#Гімн">Гімн</a>
+        <a href="#Червона калина">Калина</a>
+        <a href="#video">Відео</a>
+        <a href="#contacts">Контакти</a>
+    </div>
+    <header>
+    <div class="bgvideo">
+        <h1>Мій перший сайт</h1>
+        <video src="video/42665-432087008_medium.mp4" type="video/mp4" autoplay muted loop></video>
+    </div>
+    </header>
+    <div class="layout">
+    <nav class="panel">
+        <h2>Навігація</h2>
+        <!-- HTML !-->
+        <a href="#aboutme"> <button class="button-75"><span class="text">Про мене</span></button></a>
+        <a href="#Гімн"> <button class="button-75"><span class="text">Гімн України</span></button></a>
+        <a href="#Червона калина"> <button class="button-75"><span class="text">Червона калина</span></button></a>
+        <a href="#video"> <button class="button-75"><span class="text">Відео</span></button></a>
+        <a href="#contacts"> <button class="button-75"><span class="text">Контакти</span></button></a>
+    </nav>
+    <main>
+        <section class="reveal">
+            <h2 id="aboutme">Про мене</h2>
+            <h3 id="like">Що я люблю</h3>
+            <p>Lore ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </section>
+        <section id="Гімн" class="reveal">
+            <h3>Гімн України</h3>
+            <iframe width="100%" height="500" src="https://www.youtube.com/embed/1VCQDoYop64" title="Державний Гімн України - National Anthem of Ukraine - Rock version by Nicky Rubchenko" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </section>
+        <section id="Червона калина" class="reveal">
+            <h3>Червона калина</h3>
+            <audio controls src="audio/Бумбокс - Ой У Лузі Червона Калина.mp3"></audio>
+        </section>
+        <section id="video" class="reveal">
+            <h3>Відео</h3>
+            <video height="700" width="100%" controls>
+                <source src="video/120111-719686610_medium.mp4" type=" video/mp4">
+                <source src="video/120111-719686610_medium.webm" type="video/webm">
+            </video>
+        </section>
+    </main>
+    <aside class="panel">
+        <h2>Мої роботи</h2>
+        <a href="text.html" target="_blank"> <button class="button-75 ghost"><span class="text">text.html</span></button></a>
+        <a href="link.html" target="_blank"> <button class="button-75 ghost"><span class="text">link.html</span></button></a>
+        <a href="gradient.html" target="_blank"> <button class="button-75 ghost"><span class="text">gradient.html</span></button></a>
+        <a href="blocks.html" target="_blank"> <button class="button-75 ghost"><span class="text">blocks.html</span></button></a>
+        <a href="command map.html" target="_blank"> <button class="button-75 ghost"><span class="text">command map.html</span></button></a>
+    </aside>
+    </div>
+    <footer id="contacts">
+        <h2>Мої Контакти</h2>
+        <section class="mc"> 
+<p><a href="mailto:bykastset@gmail.com">Send email</a></p>
+<p><a href="tel:+380996290934">+380 996290934</a></p>
+            <a href="https://www.tiktok.com/@am_tide" class="fa tiktok" target="_blank">
+                <img src="tiktok (3).png" alt="My tiktok" width="50" height="50">
+            </a>
+        <p>© 2026 Мій перший сайт. Натхнено дизайном Apple.</p>
+    </footer>
+    <script>
+    // Плавна поява секцій при скролі
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+    document.querySelectorAll(".reveal").forEach(function(el) {
+        observer.observe(el);
+    });
+    </script>
+</body>
+</html>
