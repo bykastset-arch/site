@@ -1,0 +1,295 @@
+/* Общие стили и сброс */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Современный стек шрифтов (интерфейсный, системный) */
+:root {
+    --font-ui: 'Inter', 'SF Pro Text', 'Segoe UI Variable', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    --font-heading: 'Inter Tight', 'Inter', 'SF Pro Display', 'Segoe UI Variable Display', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    --font-read: 'Inter', 'Source Sans 3', 'Segoe UI Variable Text', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+    font-family: var(--font-ui);
+    line-height: 1.8;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+figcaption,
+ul,
+li,
+a,
+button {
+    font-family: var(--font-heading);
+}
+
+p {
+    font-family: var(--font-read);
+}
+
+/* Контейнер для контента */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.03)" width="50" height="50"/><rect fill="rgba(255,255,255,0.03)" x="50" y="50" width="50" height="50"/></svg>');
+    z-index: -1;
+}
+
+/* Главный контейнер */
+body > * {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 50px 60px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Заголовок h1 */
+h1 {
+    font-size: 3.5em;
+    color: #667eea;
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 2px;
+}
+
+/* Заголовки h2 */
+h2 {
+    font-size: 2em;
+    color: #764ba2;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    border-left: 5px solid #667eea;
+    padding-left: 20px;
+    transition: all 0.3s ease;
+}
+
+h2:hover {
+    border-left-color: #764ba2;
+    padding-left: 25px;
+}
+
+/* Заголовки h3 */
+h3 {
+    font-size: 1.5em;
+    color: #555;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    position: relative;
+    padding-left: 15px;
+}
+
+h3::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #667eea;
+    font-size: 1.2em;
+}
+
+/* Параграфы */
+p {
+    margin-bottom: 20px;
+    text-align: justify;
+    font-size: 1.05em;
+    line-height: 1.75;
+    color: #444;
+    text-indent: 30px;
+}
+
+/* Ссылки */
+a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background: #764ba2;
+    transition: width 0.3s ease;
+}
+
+a:hover {
+    color: #764ba2;
+}
+
+a:hover::after {
+    width: 100%;
+}
+
+/* Изображения и figure */
+figure {
+    margin: 30px 0;
+    text-align: center;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+figure:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+figure.fr {
+    float: right;
+    margin-left: 30px;
+    margin-right: 0;
+    max-width: 350px;
+}
+
+figure img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+}
+
+figcaption {
+    margin-top: 15px;
+    font-style: italic;
+    color: #666;
+    font-size: 0.95em;
+    font-weight: 500;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    body > * {
+        padding: 30px 25px;
+    }
+    
+    h1 {
+        font-size: 2.5em;
+        letter-spacing: 2px;
+    }
+    
+    h2 {
+        font-size: 1.6em;
+        margin-top: 35px;
+    }
+    
+    h3 {
+        font-size: 1.3em;
+    }
+    
+    p {
+        font-size: 1em;
+        text-indent: 20px;
+    }
+    
+    figure.fr {
+        float: none;
+        margin: 25px 0;
+        max-width: 100%;
+    }
+}
+
+/* Плавная прокрутка */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Выделение текста */
+::selection {
+    background: #667eea;
+    color: #fff;
+}
+
+::-moz-selection {
+    background: #667eea;
+    color: #fff;
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body > * {
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Стили для первого параграфа */
+h2 + p:first-of-type::first-letter {
+    font-size: 3em;
+    font-weight: bold;
+    color: #667eea;
+    float: left;
+    line-height: 0.8;
+    margin: 10px 10px 0 0;
+}
+
+/* Улучшенная типографика */
+p {
+    hyphens: auto;
+    word-spacing: 0.05em;
+}
+
+/* Тени для текста заголовков */
+h1 {
+    text-shadow: 2px 2px 4px rgba(102, 126, 234, 0.1);
+}

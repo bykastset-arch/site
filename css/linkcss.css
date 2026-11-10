@@ -1,0 +1,291 @@
+/* ===== Сброс и базовая типографика ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    padding: 40px 24px;
+    font-family: 'Segoe UI', 'Trebuchet MS', Tahoma, sans-serif;
+    background: radial-gradient(circle at 15% 15%, #4c6ef5 0%, #2b2f8f 45%, #0f1233 100%);
+    overflow-x: hidden;
+}
+
+/* Лёгкое декоративное свечение на фоне */
+body::before {
+    content: '';
+    position: fixed;
+    top: -160px;
+    right: -160px;
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 228, 132, 0.35) 0%, rgba(255, 228, 132, 0) 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    bottom: -180px;
+    left: -180px;
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(120, 190, 255, 0.25) 0%, rgba(120, 190, 255, 0) 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ===== Заголовок-параграф ===== */
+p {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    text-align: center;
+    font-size: clamp(28px, 5vw, 56px);
+    font-weight: 800;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    padding: 28px 48px;
+    border-radius: 24px;
+    color: #ffffff;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 22px 55px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+    animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Акцентная черта под заголовком */
+p::after {
+    content: '';
+    display: block;
+    width: 120px;
+    height: 6px;
+    margin: 22px auto 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #ffe066, #ffab23);
+    box-shadow: 0 0 18px rgba(255, 205, 60, 0.8);
+}
+
+/* ===== Ссылки ===== */
+a {
+    text-decoration: none;
+}
+
+/* ===== Кнопка ===== */
+.myButton {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 38px;
+    font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    color: #3a2600;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(to bottom, #ffe98a 5%, #ffab23 100%);
+    background-color: #ffec64;
+    box-shadow:
+        0 10px 24px rgba(255, 171, 35, 0.45),
+        0 2px 0 #d98c10,
+        inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    text-shadow: 0 1px 0 rgba(255, 246, 200, 0.9);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    animation: rise 0.8s 0.12s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Блик внутри кнопки */
+.myButton::before {
+    content: '';
+    position: absolute;
+    inset: 3px 3px auto 3px;
+    height: 45%;
+    border-radius: 999px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+    pointer-events: none;
+}
+
+/* Стрелка */
+.myButton::after {
+    content: '→';
+    font-size: 19px;
+    line-height: 1;
+    transition: transform 0.25s ease;
+}
+
+.myButton:hover {
+    background: linear-gradient(to bottom, #ffc44d 5%, #ff9a05 100%);
+    background-color: #ffab23;
+    transform: translateY(-4px) scale(1.03);
+    box-shadow:
+        0 18px 34px rgba(255, 171, 35, 0.55),
+        0 2px 0 #d98c10,
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.myButton:hover::after {
+    transform: translateX(4px);
+}
+
+.myButton:active {
+    transform: translateY(1px) scale(0.99);
+    box-shadow:
+        0 6px 14px rgba(255, 171, 35, 0.45),
+        0 1px 0 #d98c10,
+        inset 0 2px 6px rgba(150, 90, 0, 0.35);
+}
+
+.myButton:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 4px;
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: all 0.2s;
+  padding: 14px 21px;
+  font-size: 19px;
+  font-family: Poppins, sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+  background: radial-gradient(circle, #26C6DA, #9575CD);
+  border-radius: 16px;
+  border: none;
+  min-width: 140px;
+  min-height: 44px;
+  box-shadow: 5px 3px 0px rgba(0,0,0,0.25);
+  animation: pulse 2s ease 0s 2;
+}
+
+.btn:hover {
+  background: radial-gradient(circle, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+}
+
+.btn { --hover-duration: 0.7s; }
+
+.btn { transition: box-shadow var(--hover-duration, 0.3s) ease; }
+.btn:hover { box-shadow: 0 0 20px var(--glow-color, rgba(59, 130, 246, 0.6)); }
+
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+.btn-onw {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: all 0.2s;
+  padding: 13px 20px;
+  font-size: 18px;
+  font-family: Poppins, sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+  background: #9575CD;
+  border-radius: 10px;
+  border: none;
+  min-width: 140px;
+  min-height: 44px;
+  box-shadow: -3px 6px 3px rgba(0,0,0,0.25);
+  animation: bounce 1s ease 0s 1;
+}
+
+.btn:hover {
+  background: #4CAF82;
+  color: #ffffff;
+}
+
+.btn { --hover-bg: #4CAF82; }
+
+.btn { position: relative; overflow: hidden; }
+.btn::before { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; background: var(--hover-bg, rgba(0,0,0,0.2)); border-radius: 50%; transform: translate(-50%, -50%); z-index: 1; pointer-events: none; transition: width var(--hover-duration, 0.5s) ease, height var(--hover-duration, 0.5s) ease; }
+.btn:hover::before { width: 150%; height: 300%; }
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+/* ===== Анимация появления ===== */
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(26px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    p,
+    .myButton {
+        animation: none;
+    }
+
+    .myButton,
+    .myButton::after {
+        transition: none;
+    }
+}
+
+/* ===== Адаптивность ===== */
+@media (max-width: 560px) {
+    body {
+        gap: 32px;
+        padding: 28px 16px;
+    }
+
+    p {
+        padding: 22px 24px;
+        border-radius: 20px;
+    }
+
+    p::after {
+        width: 80px;
+        height: 4px;
+        margin-top: 16px;
+    }
+
+    .myButton {
+        width: 100%;
+        max-width: 320px;
+        padding: 15px 24px;
+    }
+}
+
